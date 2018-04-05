@@ -105,7 +105,7 @@ class gameSystem {
             textSize(32);
             textAlign(CENTER);
             fill(153, 153, 0);
-            text('NN Space Invaders', 0, height / 2, width, height / 2);
+            text('Space Invaders', 0, height / 2, width, height / 2);
 
             textSize(15);
             fill(0, 102 , 153, this.fadeLerp(2, 100, 255));
