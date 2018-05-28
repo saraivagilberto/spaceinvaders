@@ -28,7 +28,7 @@ class defenderObject extends stageObject {
         fill(this.baseColor);
         textFont(this.stage.game.siFont);
         textSize(this.w - 4);
-        text('-', this.x + (this.w / 2), this.y + (this.h - 2));
+        text('-', this.x + (this.w / 2), this.y);
     }
 
     processKey (keyCode) {
@@ -60,7 +60,7 @@ class defenderObject extends stageObject {
     }
 
     moveHorizantal (stepX) {
-        if (((stepX < 0) && (this.x - (this.w / 2) - stepX >= 0)) ||
+        if (((stepX < 0) && (this.x - (this.w / 2) - stepX >= this.stage.game.left())) ||
             ((stepX > 0) && (this.x + this.w + stepX <= this.stage.game.width()))) {
             this.move(stepX, 0);
         }

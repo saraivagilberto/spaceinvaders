@@ -229,10 +229,12 @@ class gameSystem {
         return width - 20;
     }
 
-    height () {
+    height (avoidDefender = false) {
         let offsetDefender = 0;
-        for(let defender of this.stage.defenders) {
-            offsetDefender += defender.h;
+        if (!avoidDefender) {
+            for(let defender of this.stage.defenders) {
+                offsetDefender += defender.h;
+            }
         }
                 
         return height - offsetDefender;

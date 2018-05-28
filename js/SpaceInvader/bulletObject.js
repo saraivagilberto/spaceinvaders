@@ -27,7 +27,7 @@ class bulletObject extends particleObject {
         if (this.destroyed)
             return;
 
-        if (this.y <= 0 || (this.y + this.h) >= height)
+        if (this.y <= this.stage.game.top() || (this.y + this.h) >= this.stage.game.height(true))
             this.destroy();
 
         noStroke();
