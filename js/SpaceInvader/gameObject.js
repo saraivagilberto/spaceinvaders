@@ -36,14 +36,9 @@ class gameObject {
     draw () {
         if (this.destroyed)
             return;
-
-        // noFill();
-        // stroke(this.baseColor);
-        // rect(this.x, this.y, this.w - 1, this.h - 1);
     }
 
     destroy () {
-        //console.log("Object " + this.uuid + " destroyed");
         this.destroyed = true;
     }
 }

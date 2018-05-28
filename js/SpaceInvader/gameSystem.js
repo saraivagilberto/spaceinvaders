@@ -134,6 +134,12 @@ class gameSystem {
             if (this.stage != null) {
                 this.stage.draw();
 
+                textAlign(LEFT);
+                fill(5, 250, 0);
+                textFont("Comic Sans MS");
+                textSize(20);
+                text("STAGE " + this.stage.num, 10, 25);
+
                 let topOffset = 0;
                 for(let defender of this.stage.defenders) {
                     textAlign(RIGHT);
@@ -157,8 +163,7 @@ class gameSystem {
             textSize(32);
             textAlign(CENTER);
             fill(153, 153, 0);
-            text('NN Space Invaders', 0, height / 2, width, height / 2);
-
+            text('Space Invaders', 0, height / 2, width, height / 2);
             textSize(15);
             fill(0, 102 , 153, this.fadeLerp(2, 100, 255));
             text('Press \'ENTER\' to next level', 0, (height / 2) + 50, width);
@@ -167,9 +172,12 @@ class gameSystem {
             textAlign(CENTER);
             fill(255, 50, 0, this.fadeLerp(6, 100, 255));
             text('Good Job!', 0, height / 2 - 150, width, height / 2);
+            textSize(35);
+            fill(255, 153, 0, this.fadeLerp(6, 100, 255));
+            text('Stage ' + this.stage.num + ' cleared', 0, height / 2 - 100, width, height / 2);
             textSize(32);
             fill(255, 153, 0, this.fadeLerp(6, 100, 255));
-            text('You did ' + this.stage.score + ' points ', 0, height / 2 - 100, width, height / 2);
+            text('You did ' + this.stage.score + ' points', 0, height / 2 - 60, width, height / 2);
         }
 
         if (this.screenAt == SCREEN_WINNER) {
@@ -178,7 +186,7 @@ class gameSystem {
             textSize(32);
             textAlign(CENTER);
             fill(153, 153, 0);
-            text('NN Space Invaders', 0, height / 2, width, height / 2);
+            text('Space Invaders', 0, height / 2, width, height / 2);
 
             textSize(15);
             fill(0, 102 , 153, this.fadeLerp(2, 100, 255));
@@ -197,7 +205,7 @@ class gameSystem {
         fill(127);
         textFont("Comic Sans MS");
         textSize(10);
-        text(int(frameRate()) + " | " + this.speed, 5, 15);
+        text(int(frameRate()) + " | " + this.speed, 5, height - 5);
     }
 
     switchScreen (toScreen) {
@@ -209,12 +217,25 @@ class gameSystem {
         return minVal + (((sin(radians(millis() / stepSize)) + 1) / 2) * (maxVal - minVal));
     }
 
+    top () {
+        return 20;
+    }
+
+    left () {
+        return 20;
+    }    
+
     width () {
-        return width;
+        return width - 20;
     }
 
     height () {
-        return height;
+        let offsetDefender = 0;
+        for(let defender of this.stage.defenders) {
+            offsetDefender += defender.h;
+        }
+                
+        return height - offsetDefender;
     }
 
     newGame () {

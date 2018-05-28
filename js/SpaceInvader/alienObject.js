@@ -61,7 +61,6 @@ class alienObject extends stageObject {
 
     hit (points) {
         super.hit(points);
-        //console.log("ALIEN HIT");
     }
 
     bulletHit(bullet) {

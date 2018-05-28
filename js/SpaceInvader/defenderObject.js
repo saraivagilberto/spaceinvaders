@@ -27,8 +27,8 @@ class defenderObject extends stageObject {
         textAlign(CENTER);
         fill(this.baseColor);
         textFont(this.stage.game.siFont);
-        textSize(16);
-        text('-', this.x + (this.w / 2), this.y + this.h - 2);
+        textSize(this.w - 4);
+        text('-', this.x + (this.w / 2), this.y + (this.h - 2));
     }
 
     processKey (keyCode) {
@@ -61,8 +61,9 @@ class defenderObject extends stageObject {
 
     moveHorizantal (stepX) {
         if (((stepX < 0) && (this.x - (this.w / 2) - stepX >= 0)) ||
-            ((stepX > 0) && (this.x + this.w + stepX <= this.stage.game.width())))
-        this.move(stepX, 0);
+            ((stepX > 0) && (this.x + this.w + stepX <= this.stage.game.width()))) {
+            this.move(stepX, 0);
+        }
     }
 
     shoot () {
@@ -84,7 +85,6 @@ class defenderObject extends stageObject {
 
     hit (points) {
         super.hit(points);
-        //console.log("DEFENDER HIT");
     }
 
     bulletHit(bullet) {
@@ -102,11 +102,12 @@ class defenderObject extends stageObject {
         if (bullet.hitObject != null)
             this.bulletsHits++;
 
-        for (let i = this.bullets.length - 1; i >= 0; i--)
+        for (let i = this.bullets.length - 1; i >= 0; i--) {
             if (this.bullets[i].uuid == bullet.uuid) {
                 this.bullets.splice(i, 1);
                 break;
             }
+        }
     }
 
     addScore (points) {

@@ -40,13 +40,14 @@ class stageSystem {
 
         this.ic.setInterval(this.speed);
 
-        let offset = (this.game.width() - (this.data.objects.aliens.w * this.data.objects.aliens.perRow)) / 2;
+        let woffset = this.game.left() + (this.game.width() - (this.data.objects.aliens.w * this.data.objects.aliens.perRow)) / 2;
+        let hoffset = this.game.top();
         for (let alienId in this.data.objects.aliens.types)
             if (this.data.objects.aliens.types[alienId] > 0) {
                 let theAlien = new alienObject(this, this.data.objects.aliens.types[alienId], this.data.objects.aliens.w, this.data.objects.aliens.h);
-                theAlien.move(offset +
-                    (int(alienId % this.data.objects.aliens.perRow) * this.data.objects.aliens.w),
-                    int(alienId / this.data.objects.aliens.perRow) * this.data.objects.aliens.h, true);
+                theAlien.move(
+                    woffset + (int(alienId % this.data.objects.aliens.perRow) * this.data.objects.aliens.w),
+                    hoffset + (int(alienId / this.data.objects.aliens.perRow) * this.data.objects.aliens.h), true);
 
                 this.objects.push(theAlien);
             }
@@ -87,7 +88,7 @@ class stageSystem {
             for (let object of this.objects)
                 if (object instanceof alienObject) {
                     if ((!this.reverse && (object.x + object.w + this.data.objects.aliens.step) >= this.game.width() - 1) ||
-                        (this.reverse && (object.x - this.data.objects.aliens.step) <= 0))
+                        (this.reverse && (object.x - this.data.objects.aliens.step) <= this.game.left()))
                         reachEnd = true;
                 }
 
